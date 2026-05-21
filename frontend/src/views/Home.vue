@@ -14,13 +14,13 @@
             </div>
           </div>
           
-          <!-- 渐变阴影层：确保任何背景下文字都极具可读性 -->
+          <!-- 常规清透遮罩层 -->
           <div class="carousel-overlay-shadow"></div>
 
           <!-- 优雅的文字信息层 -->
           <div class="hero-overlay">
             <h1 class="hero-title">
-              把照片变成<br />治愈的像素拼豆
+              把照片变成<br /><span class="text-nowrap">治愈的像素拼豆</span>
             </h1>
             <p class="hero-desc">
               超温柔的限定图纸已更新，<br />来挑选你今天的减压手工吧！
@@ -193,11 +193,11 @@ function onBlindBox() {
   border-radius: var(--radius-lg);
 }
 
-/* 文字背景柔和过渡层 */
+/* 常规薄层遮罩 */
 .carousel-overlay-shadow {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0) 100%);
+  background: rgba(0, 0, 0, 0.18); /* 清澈且不压抑的纯色薄遮罩 */
   pointer-events: none;
   z-index: 1;
 }
@@ -228,21 +228,21 @@ function onBlindBox() {
 }
 
 .dot {
-  width: 8px; height: 8px; border-radius: 50%;
+  width: 5px; height: 5px; border-radius: 50%;
   background: rgba(255, 255, 255, 0.4);
   cursor: pointer; transition: all 0.3s ease;
 }
 
 .dot.active {
   background: white; 
-  width: 18px;
+  width: 10px;
   border-radius: 4px;
 }
 
 /* 轮播毛玻璃切换按钮 */
 .carousel-btn {
   position: absolute; top: 50%; transform: translateY(-50%);
-  width: 42px; height: 42px; border-radius: 50%;
+  width: 32px; height: 32px; border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.25); 
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
@@ -289,27 +289,43 @@ function onBlindBox() {
   margin: 0;
 }
 
+/* 强制该重点词组不换行，防止落单折行 */
+.text-nowrap {
+  white-space: nowrap;
+}
+
 .hero-desc {
   color: rgba(255,255,255,0.9); font-size: 15px; line-height: 1.6;
   text-shadow: 0 1px 4px rgba(0,0,0,0.25);
   margin: 16px 0 24px 0;
 }
 
+/* 开始创作按钮 */
 .hero-btn {
-  background: white; color: #1a202c;
+  /* 默认状态：毛玻璃半透明灰样式，与未悬停的左右箭头相同 */
+  background: rgba(255, 255, 255, 0.15); 
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
   padding: 12px 26px; border-radius: 30px;
-  font-weight: 600; border: none; cursor: pointer;
+  font-weight: 600; cursor: pointer;
   font-size: 15px; width: fit-content;
   display: inline-flex; align-items: center; gap: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .hero-btn:hover { 
-  background: var(--primary); 
-  color: white;
+  /* 悬浮状态：纯白色背景与深色字体，与悬停时的左右箭头相同 */
+  background: white; 
+  color: #1a202c;
+  border-color: white;
   transform: translateY(-2px); 
-  box-shadow: 0 6px 20px rgba(255, 123, 147, 0.35);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
+
 .hero-btn .btn-arrow {
   transition: transform 0.3s ease;
 }
