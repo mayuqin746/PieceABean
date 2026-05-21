@@ -1,0 +1,55 @@
+import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
+
+import Home from '@/views/Home.vue'
+import Workspace from '@/views/Workspace.vue'
+import Gallery from '@/views/Gallery.vue'
+import Guide from '@/views/Guide.vue'
+import Profile from '@/views/Profile.vue'
+
+const routes: RouteRecordRaw[] = [
+  {
+    path: '/',
+    name: 'home',
+    component: Home,
+    meta: { title: '首页' },
+  },
+  {
+    path: '/workspace',
+    name: 'workspace',
+    component: Workspace,
+    meta: { title: '工作台' },
+  },
+  {
+    path: '/gallery',
+    name: 'gallery',
+    component: Gallery,
+    meta: { title: '图鉴' },
+  },
+  {
+    path: '/guide',
+    name: 'guide',
+    component: Guide,
+    meta: { title: '新手指南' },
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile,
+    meta: { title: '个人中心' },
+  },
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+  scrollBehavior() {
+    return { top: 0 }
+  },
+})
+
+router.beforeEach((to) => {
+  document.title = `${to.meta.title} - 拼豆` || '拼豆 - Piece a Bean'
+})
+
+export default router
