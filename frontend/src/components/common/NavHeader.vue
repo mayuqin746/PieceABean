@@ -174,11 +174,11 @@ function isActive(name: string) {
   height: 20px;
   border-radius: 50%;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
 }
 
 .theme-dot.active {
-  border-color: var(--text-main);
+  border-color: var(--text-light);
   transform: scale(1.1);
 }
 
