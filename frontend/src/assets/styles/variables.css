@@ -6,7 +6,7 @@
   /* secondary 是改变盲盒盒子颜色的 */
   --secondary: #A6DDF9;
   /* text-main 是改变导航栏被选中的颜色和字体颜色 */
-  --text-main: #A6DDF9;
+  --text-main: #334155;
   --text-light: #A0AEC0;
   --card-bg: #FFFFFF;
   --border-color: #E2E8F0;
@@ -14,6 +14,8 @@
   --radius-md: 16px;
   --shadow-soft: 0 8px 25px rgba(123, 164, 219, 0.08);
   --header-height: 100px;
+  --theme-text-dark: #0284C7;
+  --mood-bg: #F0F9FF;
 }
 
 [data-theme="pink"] {
@@ -21,10 +23,12 @@
   --primary: #FEADCF;
   --primary-light: #FFD1D8;
   --secondary: #FEADCF;
-  --text-main: #FEADCF;
+  --text-main: #5C4D50;
   --text-light: #A89B9E;
   --border-color: #F0E6E8;
   --shadow-soft: 0 8px 25px rgba(255, 142, 158, 0.08);
+  --theme-text-dark: #DB2777;
+  --mood-bg: #FFF1F2;
 }
 
 [data-theme="purple"] {
@@ -32,8 +36,10 @@
   --primary: #D9B6FB;
   --primary-light: #EDE9FE;
   --secondary: #D9B6FB;
-  --text-main: #D9B6FB;
+  --text-main: #4C3B6B;
   --text-light: #A49EB5;
   --border-color: #E8E4F0;
   --shadow-soft: 0 8px 25px rgba(183, 148, 244, 0.08);
+  --theme-text-dark: #9333EA;
+  --mood-bg: #FAF5FF;
 }

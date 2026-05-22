@@ -347,11 +347,11 @@ function onBlindBox() {
 /* 盲盒 */
 .card-blindbox { grid-column: span 1; background: var(--secondary); align-items: center; justify-content: center; text-align: center; cursor: pointer; }
 .blind-icon { font-size: 45px; margin-bottom: 10px; display: block; }
-.blind-title { font-size: 18px; color: #6B4E00; }
-.blind-desc { font-size: 12px; margin-top: 5px; color: #85660D; }
+.blind-title { font-size: 18px; color: var(--theme-text-dark); }
+.blind-desc { font-size: 12px; margin-top: 5px; color: var(--theme-text-dark); opacity: 0.8; }
 
 /* 色系 */
-.card-mood { grid-column: span 1; background: #E6FFFA; align-items: center; justify-content: center; text-align: center; }
+.card-mood { grid-column: span 1; background: var(--mood-bg); align-items: center; justify-content: center; text-align: center; }
 .mood-title { font-size: 16px; }
 .mood-desc { font-size: 12px; color: #718096; margin-top: 4px; }
 .mood-colors { display: flex; gap: 10px; margin-top: 15px; }

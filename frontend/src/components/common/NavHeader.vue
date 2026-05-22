@@ -109,7 +109,7 @@ function isActive(name: string) {
 }
 
 .nav-item.active {
-  background: var(--text-main);
+  background: var(--primary);
   color: white;
 }
 
