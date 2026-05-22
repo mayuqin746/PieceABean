@@ -57,9 +57,9 @@ const navItems = [
 ]
 
 const themes = [
-  { name: 'blue' as ThemeName, color: '#7BA4DB', title: '海盐蓝 🌊' },
-  { name: 'pink' as ThemeName, color: '#FF8E9E', title: '樱花粉' },
-  { name: 'green' as ThemeName, color: '#52C48E', title: '薄荷绿' },
+  { name: 'blue' as ThemeName, color: '#A6DDF9', title: '海盐蓝 🌊' },
+  { name: 'pink' as ThemeName, color: '#FEADCF', title: '樱花粉' },
+  { name: 'purple' as ThemeName, color: '#D9B6FB', title: '香芋紫' },
 ]
 
 function isActive(name: string) {

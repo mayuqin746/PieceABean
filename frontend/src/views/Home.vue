@@ -27,7 +27,7 @@
             </p>
             <button class="hero-btn" @click="$router.push('/workspace')">
               <span>开始创作</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              <!-- <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg> -->
             </button>
           </div>
 
@@ -59,7 +59,7 @@
           <span class="upload-text">上传照片</span>
         </div>
         <div class="tool-actions">
-          <div class="tool-title">魔法转换器✨</div>
+          <div class="tool-title">转换器</div>
           <select class="tool-select">
             <option>58x58 大板</option>
           </select>
@@ -309,7 +309,7 @@ function onBlindBox() {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   
-  padding: 12px 26px; border-radius: 30px;
+  padding: 10px 20px; border-radius: 30px;
   font-weight: 600; cursor: pointer;
   font-size: 15px; width: fit-content;
   display: inline-flex; align-items: center; gap: 8px;
@@ -358,7 +358,7 @@ function onBlindBox() {
 .m-color { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
 /* 推荐区 */
-.g-section-title { display: flex; justify-content: space-between; align-items: center; margin: 35px 0 20px; }
+.g-section-title { display: flex; justify-content: space-between; align-items: center; margin: 75px 0 40px; }
 .g-section-title h2 { font-weight: 900; }
 .view-all { font-size: 14px; color: var(--text-light); cursor: pointer; font-weight: bold; }
 

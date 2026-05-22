@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-export type ThemeName = 'blue' | 'pink' | 'green'
+export type ThemeName = 'blue' | 'pink' | 'purple'
 
 export const useThemeStore = defineStore('theme', () => {
   const currentTheme = ref<ThemeName>('blue')
