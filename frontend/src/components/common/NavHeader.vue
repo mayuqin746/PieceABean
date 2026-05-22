@@ -36,7 +36,7 @@
     </div>
 
     <div class="user-profile" @click="$router.push('/profile')">
-      <div class="avatar">👧🏻</div>
+      <img class="avatar" :src="headpic1" alt="头像" />
       <div class="user-label">我的主页</div>
     </div>
   </header>
@@ -45,6 +45,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { useThemeStore, type ThemeName } from '@/stores/theme'
+import headpic1 from '@/assets/images/headpic/headpic1.png'
 
 const route = useRoute()
 const store = useThemeStore()
@@ -198,14 +199,7 @@ function isActive(name: string) {
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--primary-light);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  user-select: none;
+  width: 32px; height: 32px; border-radius: 50%;
+  object-fit: cover; display: block; user-select: none;
 }
 </style>

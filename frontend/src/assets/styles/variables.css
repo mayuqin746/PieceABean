@@ -1,5 +1,6 @@
 :root {
-  --bg-color: #F4F7F9;
+  /* --bg-color: #F5F6F8; */
+  --bg-color: #e7f2fd;
   /* primary改变的是转换器的颜色 */
   --primary: #A6DDF9;
   --primary-light: #D6E6F5;
@@ -16,6 +17,7 @@
   --header-height: 100px;
   --theme-text-dark: #0284C7;
   --mood-bg: #F0F9FF;
+  --blindbox-bg: #E0F4FF;
 }
 
 [data-theme="pink"] {
@@ -29,6 +31,7 @@
   --shadow-soft: 0 8px 25px rgba(255, 142, 158, 0.08);
   --theme-text-dark: #DB2777;
   --mood-bg: #FFF1F2;
+  --blindbox-bg: #FFF0F5;
 }
 
 [data-theme="purple"] {
@@ -42,4 +45,5 @@
   --shadow-soft: 0 8px 25px rgba(183, 148, 244, 0.08);
   --theme-text-dark: #9333EA;
   --mood-bg: #FAF5FF;
+  --blindbox-bg: #F3ECFF;
 }

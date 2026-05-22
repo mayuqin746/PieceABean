@@ -179,7 +179,10 @@ function onBlindBox() {
   display: flex;
   flex-direction: column;
 }
-.bento-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(123, 164, 219, 0.15); }
+.bento-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 0 2px var(--primary), 0 8px 30px var(--shadow-soft);
+}
 
 /* 焦点海报 / 轮播 */
 .card-hero {
@@ -336,23 +339,27 @@ function onBlindBox() {
 /* 工具组件 */
 .card-tool { grid-column: span 2; display: flex; flex-direction: row; gap: 20px; align-items: center; }
 .tool-upload { flex: 1; height: 100%; min-height: 140px; border: 2px dashed var(--border-color); border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; background: #F8FAFC; transition: 0.2s; }
-.tool-upload:hover { border-color: var(--primary); background: var(--primary-light); }
+.tool-upload:hover { border-color: var(--primary); background: var(--blindbox-bg); }
 .upload-icon { font-size: 30px; margin-bottom: 5px; }
-.upload-text { font-size: 13px; font-weight: bold; color: var(--primary); }
+.upload-text { font-size: 13px; font-weight: bold; color: var(--text-main); }
 .tool-actions { flex: 1; display: flex; flex-direction: column; gap: 10px; }
 .tool-title { font-weight: 900; font-size: 16px; }
 .tool-select { width: 100%; padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); font-weight: bold; outline: none; background: #F8FAFC; color: var(--text-main); }
-.btn-magic { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 15px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+/* .btn-magic { background: linear-gradient(135deg, var(--blindbox-bg), var(--primary-light)); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 15px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.05); } */
+.btn-magic { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 15px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
 /* 盲盒 */
-.card-blindbox { grid-column: span 1; background: var(--secondary); align-items: center; justify-content: center; text-align: center; cursor: pointer; }
+/* .card-blindbox { grid-column: span 1; background: var(--blindbox-bg); align-items: center; justify-content: center; text-align: center; cursor: pointer; } */
+.card-blindbox { grid-column: span 1; background: white; align-items: center; justify-content: center; text-align: center; cursor: pointer; }
+
 /* .blind-icon { width: 140px; height: 140px; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto; } */
 .blind-icon { width: 140px; height: 140px; margin:10px auto; display: block;}
-.blind-title { font-size: 18px; color: var(--theme-text-dark); }
+.blind-title { font-size: 18px; color: var(--text-main); }
 /* .blind-desc { font-size: 12px; margin-top: 5px; color: var(--theme-text-dark); opacity: 0.8; } */
 
 /* 色系 */
-.card-mood { grid-column: span 1; background: var(--mood-bg); align-items: center; justify-content: center; text-align: center; }
+/* .card-mood { grid-column: span 1; background: var(--blindbox-bg); align-items: center; justify-content: center; text-align: center; } */
+.card-mood { grid-column: span 1; background: white; align-items: center; justify-content: center; text-align: center; }
 .mood-title { font-size: 16px; }
 .mood-desc { font-size: 12px; color: #718096; margin-top: 4px; }
 .mood-colors { display: flex; gap: 10px; margin-top: 15px; }

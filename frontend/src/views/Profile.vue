@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <div class="profile-header">
-      <div class="p-avatar">👧🏻</div>
+      <img class="p-avatar" :src="headpic1" alt="头像" />
       <div>
         <h1>Halo_同学</h1>
         <p class="p-bio">入坑拼豆的第 42 天，已经完成了 5 个作品啦！</p>
@@ -30,6 +30,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import headpic1 from '@/assets/images/headpic/headpic1.png'
 
 const activeTab = ref('favorites')
 
@@ -63,8 +64,7 @@ const displayItems = computed(() => {
 
 .p-avatar {
   width: 80px; height: 80px; border-radius: 50%;
-  background: var(--primary-light); font-size: 40px;
-  display: flex; justify-content: center; align-items: center; user-select: none;
+  object-fit: cover; display: block; user-select: none;
 }
 
 .profile-header h1 { font-weight: 900; margin-bottom: 5px; }
