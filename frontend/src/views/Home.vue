@@ -74,9 +74,9 @@
 
       <!-- 盲盒 -->
       <div class="bento-card card-blindbox" @click="onBlindBox">
-        <span class="blind-icon">🎁</span>
+        <img class="blind-icon" src="/blindbox.png" alt="盲盒" />
         <strong class="blind-title">图纸盲盒</strong>
-        <div class="blind-desc">不知道拼啥？抽一个！</div>
+        <!-- <div class="blind-desc">不知道拼啥？抽一个！</div> -->
       </div>
 
       <!-- 色系匹配 -->
@@ -346,9 +346,10 @@ function onBlindBox() {
 
 /* 盲盒 */
 .card-blindbox { grid-column: span 1; background: var(--secondary); align-items: center; justify-content: center; text-align: center; cursor: pointer; }
-.blind-icon { font-size: 45px; margin-bottom: 10px; display: block; }
+/* .blind-icon { width: 140px; height: 140px; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto; } */
+.blind-icon { width: 140px; height: 140px; margin:10px auto; display: block;}
 .blind-title { font-size: 18px; color: var(--theme-text-dark); }
-.blind-desc { font-size: 12px; margin-top: 5px; color: var(--theme-text-dark); opacity: 0.8; }
+/* .blind-desc { font-size: 12px; margin-top: 5px; color: var(--theme-text-dark); opacity: 0.8; } */
 
 /* 色系 */
 .card-mood { grid-column: span 1; background: var(--mood-bg); align-items: center; justify-content: center; text-align: center; }
