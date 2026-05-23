@@ -126,11 +126,14 @@ function isActive(name: string) {
 }
 
 .header-search::before {
-  content: "🔍";
+  content: "";
   position: absolute;
   left: 12px;
-  top: 10px;
-  font-size: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: url("/search_icon.png") center / contain no-repeat;
   z-index: 1;
 }
 

@@ -55,8 +55,8 @@
       <!-- 工具组件 -->
       <div class="bento-card card-tool">
         <div class="tool-upload" @click="$router.push('/workspace')">
-          <span class="upload-icon">📸</span>
-          <span class="upload-text">上传照片</span>
+          <img class="upload-icon" src="/uploadpic.png" alt="上传" />
+          <!-- <span class="upload-text">上传照片</span> -->
         </div>
         <div class="tool-actions">
           <div class="tool-title">转换器</div>
@@ -75,8 +75,8 @@
       <!-- 盲盒 -->
       <div class="bento-card card-blindbox" @click="onBlindBox">
         <img class="blind-icon" src="/blindbox.png" alt="盲盒" />
-        <strong class="blind-title">图纸盲盒</strong>
-        <!-- <div class="blind-desc">不知道拼啥？抽一个！</div> -->
+        <!-- <strong class="blind-title">图纸盲盒</strong> -->
+        <div class="blind-desc">不知道拼啥？抽一个！</div>
       </div>
 
       <!-- 色系匹配 -->
@@ -340,7 +340,7 @@ function onBlindBox() {
 .card-tool { grid-column: span 2; display: flex; flex-direction: row; gap: 20px; align-items: center; }
 .tool-upload { flex: 1; height: 100%; min-height: 140px; border: 2px dashed var(--border-color); border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; background: #F8FAFC; transition: 0.2s; }
 .tool-upload:hover { border-color: var(--primary); background: var(--blindbox-bg); }
-.upload-icon { font-size: 30px; margin-bottom: 5px; }
+.upload-icon { width: 100px; height: 100px; margin-bottom: 5px; object-fit: contain; }
 .upload-text { font-size: 13px; font-weight: bold; color: var(--text-main); }
 .tool-actions { flex: 1; display: flex; flex-direction: column; gap: 10px; }
 .tool-title { font-weight: 900; font-size: 16px; }
@@ -356,7 +356,7 @@ function onBlindBox() {
 
 .blind-icon { width: 140px; height: 140px; margin:10px auto; display: block;}
 .blind-title { font-size: 18px; color: var(--text-main); }
-/* .blind-desc { font-size: 12px; margin-top: 5px; color: var(--theme-text-dark); opacity: 0.8; } */
+.blind-desc { font-size: 12px; margin-top: 5px; color: var(--theme-text-dark); opacity: 0.8; }
 
 /* 色系 */
 /* .card-mood { grid-column: span 1; background: var(--blindbox-bg); align-items: center; justify-content: center; text-align: center; } */
