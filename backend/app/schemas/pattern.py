@@ -10,6 +10,8 @@ class PatternBase(BaseModel):
 
 
 class PatternCreate(PatternBase):
+    series: str | None = None
+    colors: list[str] | None = None
     grid_data: dict | None = None
     width: int = 0
     height: int = 0
@@ -17,6 +19,8 @@ class PatternCreate(PatternBase):
 
 class PatternResponse(PatternBase):
     id: int
+    series: str | None = None
+    colors: list[str] | None = None
     image_url: str | None = None
     full_image_url: str | None = None
     width: int

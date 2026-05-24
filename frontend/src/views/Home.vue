@@ -154,7 +154,7 @@ const displayList = computed<DisplayItem[]>(() => {
 
 onMounted(async () => {
   startAutoPlay()
-  const res = await fetchPatterns(undefined, 1, 4, 'likes')
+  const res = await fetchPatterns({ sort: 'likes', page: 1, page_size: 4 })
   popularList.value = res.items
 })
 

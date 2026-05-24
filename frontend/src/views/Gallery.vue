@@ -11,7 +11,7 @@
             :key="t"
             class="f-tag"
             :class="{ active: activeTheme === t }"
-            @click="selectTheme(t)"
+            @click="onFilterChange('theme', t)"
           >{{ t }}</div>
         </div>
       </div>
@@ -27,7 +27,7 @@
             :class="{ active: activeColor === c.name }"
             :style="{ background: c.value }"
             :title="c.name"
-            @click="activeColor = c.name"
+            @click="onFilterChange('color', c.name)"
           ></div>
         </div>
       </div>
@@ -41,7 +41,7 @@
             :key="s"
             class="f-tag"
             :class="{ active: activeSeries === s }"
-            @click="activeSeries = s"
+            @click="onFilterChange('series', s)"
           >{{ s }}</div>
         </div>
       </div>
@@ -50,6 +50,7 @@
       <div class="active-filters">
         <span class="af-label">当前检索：</span>
         <span v-if="activeTheme !== '全部'" class="af-tag">{{ activeTheme }} ✖</span>
+        <span v-if="activeColor !== '全部色系'" class="af-tag">{{ activeColor }} ✖</span>
         <span v-if="activeSeries !== '全部'" class="af-tag">{{ activeSeries }} ✖</span>
         <span class="clear-btn" @click="clearFilters">清空筛选</span>
       </div>
@@ -98,14 +99,21 @@ const allItems = ref<PatternItem[]>([])
 
 onMounted(() => loadPatterns())
 
-async function loadPatterns(category?: string) {
-  const res = await fetchPatterns(category)
+async function loadPatterns() {
+  const params: Record<string, string> = {}
+  if (activeTheme.value !== '全部') params.category = activeTheme.value
+  if (activeSeries.value !== '全部') params.series = activeSeries.value
+  if (activeColor.value !== '全部色系') params.color = activeColor.value
+
+  const res = await fetchPatterns(params)
   allItems.value = res.items
 }
 
-function selectTheme(t: string) {
-  activeTheme.value = t
-  loadPatterns(t === '全部' ? undefined : t)
+function onFilterChange(type: 'theme' | 'series' | 'color', value: string) {
+  if (type === 'theme') activeTheme.value = value
+  else if (type === 'series') activeSeries.value = value
+  else activeColor.value = value
+  loadPatterns()
 }
 
 function clearFilters() {
@@ -164,7 +172,7 @@ function clearFilters() {
   overflow: hidden; margin-bottom: 12px;
   display: flex; justify-content: center; align-items: center;
 }
-.g-img img { width: 100%; height: 100%; object-fit: cover; }
+.g-img img { width: 80%; height: 80%; object-fit: cover; }
 .g-placeholder { font-size: 40px; color: var(--text-light); }
 .g-title { font-weight: 900; font-size: 15px; margin-bottom: 5px; }
 .g-meta { font-size: 12px; color: var(--text-light); display: flex; justify-content: space-between; }

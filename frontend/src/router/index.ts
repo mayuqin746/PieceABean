@@ -38,6 +38,18 @@ const routes: RouteRecordRaw[] = [
     component: Profile,
     meta: { title: '个人中心' },
   },
+  {
+    path: '/admin/login',
+    name: 'admin-login',
+    component: () => import('@/views/AdminLogin.vue'),
+    meta: { title: '管理员登录' },
+  },
+  {
+    path: '/admin/upload',
+    name: 'admin-upload',
+    component: () => import('@/views/AdminUpload.vue'),
+    meta: { title: '图纸上传' },
+  },
 ]
 
 const router = createRouter({

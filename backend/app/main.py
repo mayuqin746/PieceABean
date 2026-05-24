@@ -11,6 +11,7 @@ from app.core.config import settings
 from app.core.database import engine, Base
 from app.models import User, Pattern  # 注册模型到 Base.metadata
 from app.routers import users, patterns, generator
+from app.routers.admin import router as admin_router
 
 
 @asynccontextmanager
@@ -45,6 +46,7 @@ app.add_middleware(
 app.include_router(users.router, prefix="/api/v1")
 app.include_router(patterns.router, prefix="/api/v1")
 app.include_router(generator.router, prefix="/api/v1")
+app.include_router(admin_router, prefix="/api/v1")
 
 
 # ─── 根路径健康检查 ─────────────────────────────────────────────────────────

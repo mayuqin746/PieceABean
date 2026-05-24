@@ -5,6 +5,8 @@ export interface PatternItem {
   title: string
   description: string | null
   category: string
+  series: string | null
+  colors: string[] | null
   image_url: string | null
   full_image_url: string | null
   width: number
@@ -20,10 +22,15 @@ export interface PatternListResponse {
   items: PatternItem[]
 }
 
-export async function fetchPatterns(category?: string, page = 1, pageSize = 20, sort?: string) {
-  const { data } = await api.get<PatternListResponse>('/patterns/', {
-    params: { category, sort, page, page_size: pageSize },
-  })
+export async function fetchPatterns(params: {
+  category?: string
+  series?: string
+  color?: string
+  sort?: string
+  page?: number
+  page_size?: number
+}) {
+  const { data } = await api.get<PatternListResponse>('/patterns/', { params })
   return data
 }
 

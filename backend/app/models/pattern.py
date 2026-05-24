@@ -11,6 +11,8 @@ class Pattern(Base):
     title: Mapped[str] = mapped_column(String(200), nullable=False)
     description: Mapped[str | None] = mapped_column(Text, default=None)
     category: Mapped[str] = mapped_column(String(50), nullable=False, index=True, default="其他")
+    series: Mapped[str | None] = mapped_column(String(100), default=None)
+    colors: Mapped[dict | None] = mapped_column(JSON, default=None)
     image_url: Mapped[str | None] = mapped_column(String(512), default=None)
     full_image_url: Mapped[str | None] = mapped_column(String(512), default=None)
     grid_data: Mapped[dict | None] = mapped_column(JSON, default=None)
