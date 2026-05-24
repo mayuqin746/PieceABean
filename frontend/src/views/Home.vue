@@ -99,12 +99,13 @@
     </div>
 
     <div class="gallery-grid">
-      <div v-for="item in popularList" :key="item.id" class="g-card" @click="$router.push('/gallery')">
+      <div v-for="item in displayList" :key="item.key" class="g-card" @click="$router.push('/gallery')">
         <div class="g-img">
-          <img v-if="item.image_url" :src="item.image_url" :alt="item.title" />
+          <div v-if="item.tag" class="g-tag-type">{{ item.tag }}</div>
+          <img :src="item.image_url" :alt="item.title" />
         </div>
         <div class="g-title">{{ item.title }}</div>
-        <div class="g-meta">
+        <div v-if="item.likes != null" class="g-meta">
           <span>被收藏 {{ item.likes }}</span>
         </div>
       </div>
@@ -113,7 +114,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useThemeStore } from '@/stores/theme'
 import { fetchPatterns, type PatternItem } from '@/api/patterns'
 import banner1 from '@/assets/images/banner/banner1.png'
@@ -122,7 +123,34 @@ import banner3 from '@/assets/images/banner/banner3.png'
 
 const themeStore = useThemeStore()
 
+interface DisplayItem {
+  key: string
+  image_url: string
+  title: string
+  likes: number | null
+  tag?: string
+}
+
+const defaultItems: DisplayItem[] = [
+  { key: 'default-1', image_url: '/initial_1.png', title: '草莓千层蛋糕', likes: null, tag: '官方推荐' },
+  { key: 'default-2', image_url: '/initial_2.png', title: '治愈系夏日海豚', likes: null, tag: '官方推荐' },
+  { key: 'default-3', image_url: '/initial_3.png', title: '奶酪陷阱', likes: null, tag: '官方推荐' },
+  { key: 'default-4', image_url: '/initial_4.png', title: '魔法少女水晶球', likes: null, tag: '官方推荐' },
+]
+
 const popularList = ref<PatternItem[]>([])
+
+const displayList = computed<DisplayItem[]>(() => {
+  if (popularList.value.length >= 4) {
+    return popularList.value.map((p) => ({
+      key: `real-${p.id}`,
+      image_url: p.image_url ?? '',
+      title: p.title,
+      likes: p.likes,
+    }))
+  }
+  return defaultItems
+})
 
 onMounted(async () => {
   startAutoPlay()
@@ -370,7 +398,8 @@ function onBlindBox() {
 .mood-colors { display: flex; gap: 10px; margin-top: 15px; }
 .m-color { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-/* 推荐区 */
+/* 豆友都在拼区 */
+/* 标题栏 */
 .g-section-title { display: flex; justify-content: space-between; align-items: center; margin: 75px 0 40px; }
 .g-section-title h2 { font-weight: 900; }
 .view-all { font-size: 14px; color: var(--text-light); cursor: pointer; font-weight: bold; }
@@ -379,11 +408,12 @@ function onBlindBox() {
 .g-card { background: white; border-radius: var(--radius-md); padding: 15px; cursor: pointer; box-shadow: var(--shadow-soft); transition: 0.3s; }
 .g-card:hover { transform: translateY(-5px); }
 .g-img {
-  height: 160px; background: var(--bg-color); border-radius: 12px;
-  overflow: hidden; margin-bottom: 12px;
+  height: 180px; background: var(--bg-color); border-radius: 12px;
+  overflow: hidden; margin-bottom: 12px; position: relative;
   display: flex; justify-content: center; align-items: center;
 }
-.g-img img { width: 100%; height: 100%; object-fit: cover; }
-.g-title { font-weight: 900; font-size: 15px; margin-bottom: 5px; }
+.g-img img { width: 80%; height: 80%; object-fit: cover; }
+.g-tag-type { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 10px; font-size: 11px; font-weight: bold; }
+.g-title { font-weight: 700; font-size: 14px; margin-bottom: 5px; text-align: center;}
 .g-meta { font-size: 12px; color: var(--text-light); }
 </style>
