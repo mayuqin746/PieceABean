@@ -55,7 +55,7 @@
       <!-- 工具组件 -->
       <div class="bento-card card-tool">
         <div class="tool-upload" @click="$router.push('/workspace')">
-          <img class="upload-icon" src="/uploadpic.png" alt="上传" />
+          <img class="upload-icon" :src="`/${themeStore.currentTheme}_uploadpic.png`" alt="上传" />
           <!-- <span class="upload-text">上传照片</span> -->
         </div>
         <div class="tool-actions">
@@ -74,7 +74,7 @@
 
       <!-- 盲盒 -->
       <div class="bento-card card-blindbox" @click="onBlindBox">
-        <img class="blind-icon" src="/blindbox.png" alt="盲盒" />
+        <img class="blind-icon" :src="`/${themeStore.currentTheme}_blindbox.png`" alt="盲盒" />
         <!-- <strong class="blind-title">图纸盲盒</strong> -->
         <div class="blind-desc">不知道拼啥？抽一个！</div>
       </div>
@@ -99,15 +99,13 @@
     </div>
 
     <div class="gallery-grid">
-      <div v-for="item in featuredList" :key="item.title" class="g-card">
-        <div class="g-img" :style="{ background: item.bg }">
-          <div class="g-tag-type">{{ item.tag }}</div>
-          {{ item.emoji }}
+      <div v-for="item in popularList" :key="item.id" class="g-card" @click="$router.push('/gallery')">
+        <div class="g-img">
+          <img v-if="item.image_url" :src="item.image_url" :alt="item.title" />
         </div>
         <div class="g-title">{{ item.title }}</div>
         <div class="g-meta">
-          <span>{{ item.size }}</span>
-          <span>被收藏 {{ item.stars }}</span>
+          <span>被收藏 {{ item.likes }}</span>
         </div>
       </div>
     </div>
@@ -116,9 +114,21 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useThemeStore } from '@/stores/theme'
+import { fetchPatterns, type PatternItem } from '@/api/patterns'
 import banner1 from '@/assets/images/banner/banner1.png'
 import banner2 from '@/assets/images/banner/banner2.png'
 import banner3 from '@/assets/images/banner/banner3.png'
+
+const themeStore = useThemeStore()
+
+const popularList = ref<PatternItem[]>([])
+
+onMounted(async () => {
+  startAutoPlay()
+  const res = await fetchPatterns(undefined, 1, 4, 'likes')
+  popularList.value = res.items
+})
 
 const banners = [
   { src: banner1, alt: 'Banner 1' },
@@ -148,15 +158,7 @@ function stopAutoPlay() {
   }
 }
 
-onMounted(startAutoPlay)
 onUnmounted(stopAutoPlay)
-
-const featuredList = [
-  { emoji: '🍓', title: '草莓千层蛋糕', size: '29x29小板', stars: '2.1k', tag: '附成品实拍', bg: '#FFF0F5' },
-  { emoji: '🐳', title: '治愈系夏日海豚', size: '58x58大板', stars: '1.8k', tag: '像素图纸', bg: '#E0FFFF' },
-  { emoji: '🧀', title: '奶酪陷阱(新手友好)', size: '29x29小板', stars: '3.5k', tag: '附成品实拍', bg: '#FFFACD' },
-  { emoji: '🔮', title: '魔法少女水晶球', size: '58x58大板', stars: '996', tag: '像素图纸', bg: '#E6E6FA' },
-]
 
 function onBlindBox() {
   alert('恭喜抽中隐藏款：【治愈海豚】！')
@@ -352,8 +354,8 @@ function onBlindBox() {
 /* 盲盒 */
 /* .card-blindbox { grid-column: span 1; background: var(--blindbox-bg); align-items: center; justify-content: center; text-align: center; cursor: pointer; } */
 /* .card-blindbox { grid-column: span 1; background: white; align-items: center; justify-content: center; text-align: center; cursor: pointer; } */
-.card-blindbox { grid-column: span 1; background: var(--blindbox-bg); align-items: center; justify-content: center; text-align: center; cursor: pointer; }
-
+.card-blindbox { grid-column: span 1; background: #F8FAFC; align-items: center; justify-content: center; text-align: center; cursor: pointer; }
+.card-blindbox:hover { border-color: var(--primary); background: var(--blindbox-bg); }
 .blind-icon { width: 140px; height: 140px; margin:10px auto; display: block;}
 .blind-title { font-size: 18px; color: var(--text-main); }
 .blind-desc { font-size: 12px; margin-top: 5px; color: var(--theme-text-dark); opacity: 0.8; }
@@ -376,8 +378,12 @@ function onBlindBox() {
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
 .g-card { background: white; border-radius: var(--radius-md); padding: 15px; cursor: pointer; box-shadow: var(--shadow-soft); transition: 0.3s; }
 .g-card:hover { transform: translateY(-5px); }
-.g-img { height: 160px; background: var(--bg-color); border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 60px; margin-bottom: 12px; position: relative; }
-.g-tag-type { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 10px; font-size: 11px; font-weight: bold; }
+.g-img {
+  height: 160px; background: var(--bg-color); border-radius: 12px;
+  overflow: hidden; margin-bottom: 12px;
+  display: flex; justify-content: center; align-items: center;
+}
+.g-img img { width: 100%; height: 100%; object-fit: cover; }
 .g-title { font-weight: 900; font-size: 15px; margin-bottom: 5px; }
-.g-meta { font-size: 12px; color: var(--text-light); display: flex; justify-content: space-between; }
+.g-meta { font-size: 12px; color: var(--text-light); }
 </style>

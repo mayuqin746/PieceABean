@@ -29,6 +29,9 @@ class Settings(BaseSettings):
     # CORS
     CORS_ORIGINS: List[str] = ["http://localhost:5173"]
 
+    # 静态文件
+    STATIC_BASE_URL: str = "http://localhost:8000"
+
     # 文件上传
     UPLOAD_DIR: str = "./uploads"
     MAX_UPLOAD_SIZE_MB: int = 10

@@ -11,7 +11,7 @@
             :key="t"
             class="f-tag"
             :class="{ active: activeTheme === t }"
-            @click="activeTheme = t"
+            @click="selectTheme(t)"
           >{{ t }}</div>
         </div>
       </div>
@@ -49,28 +49,25 @@
       <!-- 交叉过滤状态栏 -->
       <div class="active-filters">
         <span class="af-label">当前检索：</span>
-        <span
-          v-if="activeTheme !== '全部'"
-          class="af-tag"
-        >{{ activeTheme }} ✖</span>
-        <span
-          v-if="activeSeries !== '全部'"
-          class="af-tag"
-        >{{ activeSeries }} ✖</span>
+        <span v-if="activeTheme !== '全部'" class="af-tag">{{ activeTheme }} ✖</span>
+        <span v-if="activeSeries !== '全部'" class="af-tag">{{ activeSeries }} ✖</span>
         <span class="clear-btn" @click="clearFilters">清空筛选</span>
       </div>
     </div>
 
     <!-- 结果 -->
-    <div class="g-result-title">共检索到 {{ filteredList.length }} 张精致图纸</div>
+    <div class="g-result-title">共检索到 {{ allItems.length }} 张精致图纸</div>
 
     <div class="gallery-grid">
-      <div v-for="item in filteredList" :key="item.title" class="g-card">
-        <div class="g-img">{{ item.emoji }}</div>
+      <div v-for="item in allItems" :key="item.id" class="g-card" @click="$router.push(`/gallery/${item.id}`)">
+        <div class="g-img">
+          <img v-if="item.image_url" :src="item.image_url" :alt="item.title" />
+          <span v-else class="g-placeholder">{{ item.title.slice(0, 2) }}</span>
+        </div>
         <div class="g-title">{{ item.title }}</div>
         <div class="g-meta">
-          <span>{{ item.size }}</span>
-          <span>{{ item.tags }}</span>
+          <span>{{ item.width }}x{{ item.height }}</span>
+          <span>被收藏 {{ item.likes }}</span>
         </div>
       </div>
     </div>
@@ -78,9 +75,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, onMounted } from 'vue'
+import { fetchPatterns, type PatternItem } from '@/api/patterns'
 
-const themes = ['全部', '📺 动漫/IP', '🐾 萌宠动物', '🍔 美食饮品', '🌿 生活日常', '🌟 明星应援']
+const themes = ['全部', '动漫/IP', '萌宠动物', '美食饮品', '生活日常', '明星应援', '其他']
 const colors = [
   { name: '全部色系', value: 'conic-gradient(red, yellow, lime, aqua, blue, magenta, red)' },
   { name: '粉色系', value: '#FFB6C1' },
@@ -92,29 +90,29 @@ const colors = [
 ]
 const series = ['全部', '三丽鸥', '线条小狗', '星之卡比', '马里奥', '吉伊卡哇(Chiikawa)']
 
-const activeTheme = ref('📺 动漫/IP')
+const activeTheme = ref('全部')
 const activeColor = ref('全部色系')
-const activeSeries = ref('三丽鸥')
+const activeSeries = ref('全部')
 
-const allItems = [
-  { emoji: '🎀', title: 'Hello Kitty', size: '29x29小板', tags: '#三丽鸥 #粉色系', theme: '📺 动漫/IP', series: '三丽鸥' },
-  { emoji: '🐶', title: '线条小狗', size: '29x29小板', tags: '#线条小狗 #白灰系', theme: '🐾 萌宠动物', series: '线条小狗' },
-  { emoji: '💖', title: '星之卡比吃大福', size: '58x58大板', tags: '#星之卡比 #粉色系', theme: '📺 动漫/IP', series: '星之卡比' },
-  { emoji: '☁️', title: '大耳狗玉桂狗', size: '58x58大板', tags: '#三丽鸥 #蓝色系', theme: '📺 动漫/IP', series: '三丽鸥' },
-]
+const allItems = ref<PatternItem[]>([])
 
-const filteredList = computed(() => {
-  return allItems.filter((item) => {
-    if (activeTheme.value !== '全部' && item.theme !== activeTheme.value) return false
-    if (activeSeries.value !== '全部' && item.series !== activeSeries.value) return false
-    return true
-  })
-})
+onMounted(() => loadPatterns())
+
+async function loadPatterns(category?: string) {
+  const res = await fetchPatterns(category)
+  allItems.value = res.items
+}
+
+function selectTheme(t: string) {
+  activeTheme.value = t
+  loadPatterns(t === '全部' ? undefined : t)
+}
 
 function clearFilters() {
   activeTheme.value = '全部'
   activeColor.value = '全部色系'
   activeSeries.value = '全部'
+  loadPatterns()
 }
 </script>
 
@@ -161,7 +159,13 @@ function clearFilters() {
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
 .g-card { background: white; border-radius: var(--radius-md); padding: 15px; cursor: pointer; box-shadow: var(--shadow-soft); transition: 0.3s; }
 .g-card:hover { transform: translateY(-5px); }
-.g-img { height: 160px; background: var(--bg-color); border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 60px; margin-bottom: 12px; }
+.g-img {
+  height: 160px; background: var(--bg-color); border-radius: 12px;
+  overflow: hidden; margin-bottom: 12px;
+  display: flex; justify-content: center; align-items: center;
+}
+.g-img img { width: 100%; height: 100%; object-fit: cover; }
+.g-placeholder { font-size: 40px; color: var(--text-light); }
 .g-title { font-weight: 900; font-size: 15px; margin-bottom: 5px; }
 .g-meta { font-size: 12px; color: var(--text-light); display: flex; justify-content: space-between; }
 </style>

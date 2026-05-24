@@ -1,12 +1,15 @@
 """拼豆 PieceABean —— FastAPI 应用入口"""
 
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.core.config import settings
 from app.core.database import engine, Base
+from app.models import User, Pattern  # 注册模型到 Base.metadata
 from app.routers import users, patterns, generator
 
 
@@ -23,6 +26,11 @@ app = FastAPI(
     description="拼豆图纸在线生成与分享平台",
     lifespan=lifespan,
 )
+
+# ─── 静态文件：图纸图片 ──────────────────────────────────────────────────────
+patterns_dir = Path(r"D:\Desktop\pieceabean-data\patterns")
+if patterns_dir.exists():
+    app.mount("/static/patterns", StaticFiles(directory=str(patterns_dir)), name="patterns")
 
 # ─── CORS 跨域配置 ──────────────────────────────────────────────────────────
 app.add_middleware(

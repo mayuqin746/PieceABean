@@ -1,7 +1,7 @@
 <template>
   <div class="floating-pet" @click="$emit('click')">
     <div class="chat-bubble">{{ message }}</div>
-    <div class="sprite">🐹</div>
+    <div class="sprite"></div>
   </div>
 </template>
 
@@ -20,6 +20,7 @@ defineEmits<{ click: [] }>()
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  animation: float 2s infinite ease-in-out;
 }
 
 .chat-bubble {
@@ -56,10 +57,17 @@ defineEmits<{ click: [] }>()
 }
 
 .sprite {
-  font-size: 45px;
-  animation: float 2s infinite ease-in-out;
-  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.1));
+  width: 102px;
+  height: 125px;
+  background: url("/sprite.png") no-repeat;
+  background-size: 410px 125px;
+  animation: play 2s steps(4) infinite;
   user-select: none;
+}
+
+@keyframes play {
+  from { background-position: 0 0; }
+  to { background-position: -410px 0; }
 }
 
 @keyframes float {
