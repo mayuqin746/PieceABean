@@ -412,7 +412,7 @@ function onBlindBox() {
   overflow: hidden; margin-bottom: 12px; position: relative;
   display: flex; justify-content: center; align-items: center;
 }
-.g-img img { width: 80%; height: 80%; object-fit: cover; }
+.g-img img { width: 100%; height: 100%; object-fit: cover; }
 .g-tag-type { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 10px; font-size: 11px; font-weight: bold; }
 .g-title { font-weight: 700; font-size: 14px; margin-bottom: 5px; text-align: center;}
 .g-meta { font-size: 12px; color: var(--text-light); }

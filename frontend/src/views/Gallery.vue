@@ -172,7 +172,7 @@ function clearFilters() {
   overflow: hidden; margin-bottom: 12px;
   display: flex; justify-content: center; align-items: center;
 }
-.g-img img { width: 80%; height: 80%; object-fit: cover; }
+.g-img img { width: 100%; height: 100%; object-fit: cover; }
 .g-placeholder { font-size: 40px; color: var(--text-light); }
 .g-title { font-weight: 900; font-size: 15px; margin-bottom: 5px; }
 .g-meta { font-size: 12px; color: var(--text-light); display: flex; justify-content: space-between; }
